@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 5: Cuidar el Tejido (Sostenibilidad Financiera)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0fdf4;
+        }
+
+        .finance-card {
+            transition: all 0.3s ease;
+        }
+
+        .finance-card:hover {
+            transform: translateY(-5px);
+            border-color: #10b981;
+        }
+
+        .progress-bar {
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .step-content {
+            display: none;
+        }
+
+        .step-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .check-item input:checked + label {
+            color: #059669;
+            font-weight: 600;
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-10">
+    <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden border border-emerald-100">
+        <!-- Header -->
+        <div class="bg-emerald-600 p-8 text-white">
+            <div class="flex justify-between items-center mb-4">
+                <span class="text-xs font-bold uppercase tracking-widest bg-emerald-500 px-3 py-1 rounded-full">Finanzas y Sostenibilidad</span>
+                <span id="stepCounter" class="text-sm font-medium">Fase 1 de 4</span>
+            </div>
+            <h1 class="text-3xl font-bold">Módulo 5: Cuidar el Tejido</h1>
+            <p class="text-emerald-100 mt-2">"Sostenibilidad no es crecer rápido, es no romperse en el camino."</p>
+            
+            <div class="w-full bg-emerald-800/30 h-2 mt-8 rounded-full">
+                <div id="progressBar" class="progress-bar bg-emerald-300 h-full w-1/4 rounded-full"></div>
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="p-8 md:p-12">
+            
+            <!-- Step 1: Flujo vs Utilidad -->
+            <div id="step1" class="step-content active">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">El oxígeno del negocio: El Flujo de Caja</h2>
+                <p class="text-gray-600 mb-8 leading-relaxed">
+                    Muchos negocios cierran siendo "rentables" en el papel porque se quedan sin dinero en el banco. Entender la diferencia es vital.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="p-6 bg-gray-50 rounded-2xl border-2 border-gray-100">
+                        <h3 class="font-bold text-gray-700 mb-2">Utilidad Contable</h3>
+                        <p class="text-sm text-gray-500 italic">"Vendí $5.000 este mes y gasté $2.000. Gané $3.000."</p>
+                        <p class="mt-4 text-xs font-medium text-red-500">Riesgo: Los $3.000 pueden estar en facturas que cobrarás en 60 días.</p>
+                    </div>
+                    <div class="p-6 bg-emerald-50 rounded-2xl border-2 border-emerald-100">
+                        <h3 class="font-bold text-emerald-800 mb-2">Flujo de Caja</h3>
+                        <p class="text-sm text-emerald-700 italic">"Tengo $1.500 en la cuenta hoy para pagar el sueldo."</p>
+                        <p class="mt-4 text-xs font-medium text-emerald-600">Realidad: Esto es lo que mantiene el negocio vivo día a día.</p>
+                    </div>
+                </div>
+
+                <button onclick="nextStep(2)" class="mt-10 bg-emerald-600 text-white px-10 py-4 rounded-xl font-bold hover:bg-emerald-700 transition w-full md:w-auto">Siguiente: La Regla de Inversión</button>
+            </div>
+
+            <!-- Step 2: La Regla de los 3 Meses -->
+            <div id="step2" class="step-content">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">¿Cuándo tiene sentido invertir?</h2>
+                <p class="text-gray-600 mb-8">No uses tu liquidación para gastos innecesarios. Aplica la regla de oro de la prudencia:</p>
+                
+                <div class="space-y-4">
+                    <div class="finance-card p-6 border-2 border-gray-100 rounded-2xl flex items-center gap-6">
+                        <div class="text-4xl">🕒</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Tres meses de estabilidad</h4>
+                            <p class="text-sm text-gray-600">Solo invierte cuando los ingresos cubran costos y tu sueldo por 90 días seguidos.</p>
+                        </div>
+                    </div>
+                    <div class="finance-card p-6 border-2 border-gray-100 rounded-2xl flex items-center gap-6">
+                        <div class="text-4xl">🔄</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Retorno claro</h4>
+                            <p class="text-sm text-gray-600">Cada peso invertido debe ahorrarte tiempo o permitirte cobrar una tarifa más alta.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-yellow-50 p-4 rounded-xl mt-8 border border-yellow-100 text-sm text-yellow-800">
+                    <strong>Consejo:</strong> Transfiérete un sueldo fijo mensual, aunque sea modesto. Esto te da orden mental y financiero.
+                </div>
+
+                <div class="flex justify-between mt-12">
+                    <button onclick="nextStep(1)" class="text-emerald-600 font-bold">Atrás</button>
+                    <button onclick="nextStep(3)" class="bg-emerald-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-emerald-700 transition">Siguiente: Checklist</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Checklist Trimestral -->
+            <div id="step3" class="step-content">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Checklist de Sostenibilidad</h2>
+                <p class="text-gray-600 mb-6 text-sm">Evalúa la salud de tu tejido cada tres meses con estas preguntas clave:</p>
+                
+                <div class="space-y-3">
+                    <div class="check-item flex items-center gap-3 p-4 bg-gray-50 rounded-xl">
+                        <input type="checkbox" id="c1" class="w-5 h-5 accent-emerald-600">
+                        <label for="c1" class="text-gray-700 cursor-pointer">¿Mis ingresos cubren mi sueldo fijo y mis costos operativos?</label>
+                    </div>
+                    <div class="check-item flex items-center gap-3 p-4 bg-gray-50 rounded-xl">
+                        <input type="checkbox" id="c2" class="w-5 h-5 accent-emerald-600">
+                        <label for="c2" class="text-gray-700 cursor-pointer">¿He reservado un porcentaje para imprevistos o impuestos?</label>
+                    </div>
+                    <div class="check-item flex items-center gap-3 p-4 bg-gray-50 rounded-xl">
+                        <input type="checkbox" id="c3" class="w-5 h-5 accent-emerald-600">
+                        <label for="c3" class="text-gray-700 cursor-pointer">¿Mi tiempo se dedica más a la estrategia que a la administración básica?</label>
+                    </div>
+                    <div class="check-item flex items-center gap-3 p-4 bg-gray-50 rounded-xl">
+                        <input type="checkbox" id="c4" class="w-5 h-5 accent-emerald-600">
+                        <label for="c4" class="text-gray-700 cursor-pointer">¿Tengo al menos dos fuentes o clientes que generen recurrencia?</label>
+                    </div>
+                </div>
+
+                <div class="flex justify-between mt-12">
+                    <button onclick="nextStep(2)" class="text-emerald-600 font-bold">Atrás</button>
+                    <button onclick="nextStep(4)" class="bg-emerald-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-emerald-700 transition">Finalizar Curso</button>
+                </div>
+            </div>
+
+            <!-- Step 4: Cierre del Curso -->
+            <div id="step4" class="step-content text-center py-6">
+                <div class="text-7xl mb-6">🌿</div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">El Tejido que sigue creciendo</h2>
+                <p class="text-gray-600 mb-8 max-w-lg mx-auto leading-relaxed">
+                    Has aprendido a elegir tu hilo, validarlo, estructurarlo, mostrarlo y sostenerlo. Emprender no es un salto de fe, es una construcción consciente.
+                </p>
+                
+                <div class="bg-emerald-50 border border-emerald-100 p-8 rounded-3xl text-left">
+                    <h4 class="font-bold text-emerald-900 mb-4 uppercase tracking-tighter">Tu compromiso final:</h4>
+                    <p class="text-emerald-700 text-sm italic">
+                        "No buscaré la idea perfecta, sino la acción constante. Cuidaré mi energía y mi caja para que mi tejido nunca deje de crecer."
+                    </p>
+                </div>
+
+                <div class="mt-12 flex flex-col items-center gap-4">
+                    <button onclick="location.reload()" class="bg-emerald-600 text-white px-12 py-4 rounded-full font-bold shadow-lg hover:bg-emerald-700 transition">Reiniciar Recurso</button>
+                    <p class="text-xs text-gray-400">© 2024 Offboarding: El Arte de Tejer tu Negocio</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function nextStep(step) {
+            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
+            document.getElementById('step' + step).classList.add('active');
+            
+            const progress = (step / 4) * 100;
+            document.getElementById('progressBar').style.width = Math.min(progress, 100) + '%';
+            document.getElementById('stepCounter').innerText = `Fase ${Math.min(step, 4)} de 4`;
+            window.scrollTo(0,0);
+        }
+    </script>
+</body>
+</html>
