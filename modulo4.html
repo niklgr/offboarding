@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 4: Mostrar el Tejido (Marketing y Marca Personal)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fdf2f8;
+        }
+
+        .marketing-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .marketing-card:hover {
+            transform: translateY(-8px);
+            border-color: #db2777;
+        }
+
+        .progress-bar {
+            transition: width 0.6s ease;
+        }
+
+        .step-content {
+            display: none;
+        }
+
+        .step-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .profile-box {
+            border: 2px dashed #d1d5db;
+        }
+
+        .profile-box.correct {
+            border-color: #10b981;
+            background-color: #ecfdf5;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-10">
+    <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden">
+        <!-- Header -->
+        <div class="bg-pink-600 p-8 text-white">
+            <div class="flex justify-between items-center mb-4">
+                <span class="text-xs font-bold uppercase tracking-widest bg-pink-500 px-3 py-1 rounded-full">Marca Personal</span>
+                <span id="stepCounter" class="text-sm font-medium text-pink-100">Etapa 1 de 4</span>
+            </div>
+            <h1 class="text-3xl font-bold">Módulo 4: Mostrar el Tejido</h1>
+            <p class="text-pink-100 mt-2">"El marketing no es gritar, es hacerse visible para quien te necesita."</p>
+            
+            <div class="w-full bg-pink-800/30 h-2 mt-8 rounded-full">
+                <div id="progressBar" class="progress-bar bg-pink-200 h-full w-1/4 rounded-full"></div>
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="p-8 md:p-12">
+            
+            <!-- Step 1: Los 4 Hilos del Marketing -->
+            <div id="step1" class="step-content active">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">¿Cómo generamos confianza?</h2>
+                <p class="text-gray-600 mb-8 leading-relaxed">
+                    Nadie compra servicios de alguien en quien no confía. El marketing para un emprendedor en transición se basa en cuatro hilos fundamentales:
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="marketing-card p-5 border-2 border-pink-50 rounded-2xl bg-pink-50/30">
+                        <h3 class="font-bold text-pink-700 flex items-center gap-2"><span>🛡️</span> Credibilidad</h3>
+                        <p class="text-xs text-gray-600 mt-1">Demostrar que sabes de lo que hablas (historia laboral).</p>
+                    </div>
+                    <div class="marketing-card p-5 border-2 border-pink-50 rounded-2xl bg-pink-50/30">
+                        <h3 class="font-bold text-pink-700 flex items-center gap-2"><span>🎁</span> Utilidad</h3>
+                        <p class="text-xs text-gray-600 mt-1">Ayudar antes de vender compartiendo consejos útiles.</p>
+                    </div>
+                    <div class="marketing-card p-5 border-2 border-pink-50 rounded-2xl bg-pink-50/30">
+                        <h3 class="font-bold text-pink-700 flex items-center gap-2"><span>🔄</span> Repetición</h3>
+                        <p class="text-xs text-gray-600 mt-1">Aparecer de forma constante para no ser olvidado.</p>
+                    </div>
+                    <div class="marketing-card p-5 border-2 border-pink-50 rounded-2xl bg-pink-50/30">
+                        <h3 class="font-bold text-pink-700 flex items-center gap-2"><span>🤝</span> Proximidad</h3>
+                        <p class="text-xs text-gray-600 mt-1">Estar donde el cliente está y hablar su mismo idioma.</p>
+                    </div>
+                </div>
+
+                <button onclick="nextStep(2)" class="mt-10 bg-pink-600 text-white px-10 py-4 rounded-xl font-bold hover:bg-pink-700 transition w-full md:w-auto">Siguiente: El Perfil de LinkedIn</button>
+            </div>
+
+            <!-- Step 2: LinkedIn Simulator -->
+            <div id="step2" class="step-content">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Tu Vitrina Digital</h2>
+                <p class="text-gray-600 mb-6">Tu perfil debe dejar de ser un resumen de tu pasado para ser una solución para el futuro. ¿Cuál de estos titulares es más efectivo?</p>
+                
+                <div class="space-y-4">
+                    <button onclick="selectTitular(1)" id="tit1" class="profile-box w-full p-6 rounded-xl text-left transition-all">
+                        <p class="text-sm font-bold text-gray-400 mb-1">Opción A</p>
+                        <p class="font-medium text-gray-700">"Gerente de Operaciones con 20 años de experiencia en logística y distribución."</p>
+                    </button>
+                    <button onclick="selectTitular(2)" id="tit2" class="profile-box w-full p-6 rounded-xl text-left transition-all">
+                        <p class="text-sm font-bold text-gray-400 mb-1">Opción B</p>
+                        <p class="font-medium text-gray-700">"Ayudo a empresas de transporte a reducir sus costos operativos mediante inteligencia logística."</p>
+                    </button>
+                </div>
+
+                <div id="titFeedback" class="mt-6 p-4 rounded-lg hidden text-sm"></div>
+
+                <div class="flex justify-between mt-12">
+                    <button onclick="nextStep(1)" class="text-pink-600 font-bold">Atrás</button>
+                    <button id="btnNext2" onclick="nextStep(3)" class="bg-pink-600 text-white px-8 py-4 rounded-xl font-bold opacity-50 cursor-not-allowed" disabled>Avanzar</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Contenido de Valor -->
+            <div id="step3" class="step-content">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">El Hilo de la Utilidad</h2>
+                <p class="text-gray-600 mb-8">No publiques para impresionar a tus colegas, publica para ayudar a tu cliente. La regla de oro es: <strong>Dar valor antes de pedir dinero.</strong></p>
+                
+                <div class="bg-gray-50 border-2 border-gray-100 rounded-2xl p-6">
+                    <h4 class="font-bold text-gray-800 mb-4 flex items-center gap-2"><span>📝</span> Ideas de publicación:</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="p-3 bg-white rounded-lg border text-xs text-gray-600">"3 errores comunes al contratar un servicio de [Tu rubro]"</div>
+                        <div class="p-3 bg-white rounded-lg border text-xs text-gray-600">"Cómo resolvimos un problema de [Dolor] en 48 horas"</div>
+                        <div class="p-3 bg-white rounded-lg border text-xs text-gray-600">"Una guía rápida para entender por qué pierdes dinero en [Área]"</div>
+                    </div>
+                </div>
+
+                <div class="flex justify-between mt-12">
+                    <button onclick="nextStep(2)" class="text-pink-600 font-bold">Atrás</button>
+                    <button onclick="nextStep(4)" class="bg-pink-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-pink-700 transition">Cuestionario Final</button>
+                </div>
+            </div>
+
+            <!-- Step 4: Quiz -->
+            <div id="step4" class="step-content">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Validación Módulo 4</h2>
+                <div class="p-8 bg-pink-50 rounded-2xl border-2 border-pink-100">
+                    <p class="font-bold text-gray-800 mb-6">¿Cuál es el propósito principal de compartir consejos útiles en redes sociales?</p>
+                    
+                    <div class="space-y-4">
+                        <button onclick="finish(false)" class="w-full text-left p-4 bg-white border border-gray-200 rounded-xl hover:border-pink-400">
+                            A) Conseguir la mayor cantidad de "Likes" de amigos y familiares.
+                        </button>
+                        <button onclick="finish(true)" class="w-full text-left p-4 bg-white border border-gray-200 rounded-xl hover:border-pink-400">
+                            B) Demostrar que puedes resolver problemas reales y generar confianza.
+                        </button>
+                        <button onclick="finish(false)" class="w-full text-left p-4 bg-white border border-gray-200 rounded-xl hover:border-pink-400">
+                            C) Evitar tener que llamar a los clientes por teléfono.
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Final Result -->
+            <div id="step5" class="step-content text-center py-10">
+                <div class="text-6xl mb-6">📢</div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">¡Marca Personal Activada!</h2>
+                <p class="text-gray-600 mb-8 max-w-md mx-auto">Ya sabes cómo mostrar tu tejido al mundo sin parecer un vendedor insistente. La clave es la confianza.</p>
+                
+                <div class="inline-block text-left p-6 bg-green-50 rounded-2xl">
+                    <h4 class="font-bold text-green-800 mb-2 italic">Próximo paso:</h4>
+                    <p class="text-sm text-green-700">Comienza a publicar utilidad una vez por semana. La repetición hará el resto.</p>
+                </div>
+
+                <div class="mt-12">
+                    <button onclick="location.reload()" class="text-pink-600 underline font-medium">Reiniciar recurso</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function nextStep(step) {
+            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
+            document.getElementById('step' + step).classList.add('active');
+            
+            const progress = (step / 4) * 100;
+            document.getElementById('progressBar').style.width = Math.min(progress, 100) + '%';
+            document.getElementById('stepCounter').innerText = `Etapa ${Math.min(step, 4)} de 4`;
+            window.scrollTo(0,0);
+        }
+
+        function selectTitular(opt) {
+            const f = document.getElementById('titFeedback');
+            const btn = document.getElementById('btnNext2');
+            document.querySelectorAll('.profile-box').forEach(b => b.classList.remove('correct', 'border-red-400'));
+            
+            f.classList.remove('hidden', 'bg-red-100', 'text-red-700', 'bg-green-100', 'text-green-700');
+
+            if(opt === 1) {
+                document.getElementById('tit1').classList.add('border-red-400');
+                f.innerText = "Esto es un perfil de 'Buscador de Empleo'. Habla del pasado, no del beneficio para el cliente.";
+                f.classList.add('bg-red-100', 'text-red-700');
+            } else {
+                document.getElementById('tit2').classList.add('correct');
+                f.innerText = "¡Excelente! Este titular habla de una solución y un cliente específico. Genera interés inmediato.";
+                f.classList.add('bg-green-100', 'text-green-700');
+                btn.classList.remove('opacity-50', 'cursor-not-allowed');
+                btn.disabled = false;
+            }
+        }
+
+        function finish(isCorrect) {
+            if(isCorrect) {
+                nextStep(5);
+            } else {
+                alert("Incorrecto. El marketing de marca personal busca construir autoridad moral y técnica ayudando a otros.");
+            }
+        }
+    </script>
+</body>
+</html>
