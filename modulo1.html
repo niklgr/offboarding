@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 1: Elegir el Hilo Emprendedor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+
+        .thread-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .thread-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-bar {
+            transition: width 0.5s ease-in-out;
+        }
+
+        .step-content {
+            display: none;
+        }
+
+        .step-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+    <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
+        <!-- Header -->
+        <div class="bg-indigo-700 p-6 text-white text-center">
+            <h1 class="text-2xl md:text-3xl font-bold">Módulo 1: Elegir el Hilo</h1>
+            <p class="text-indigo-100 mt-2 italic">"Tu mejor idea de negocio ya está dentro de ti"</p>
+            <div class="w-full bg-indigo-900 h-2 mt-6 rounded-full overflow-hidden">
+                <div id="progressBar" class="progress-bar bg-yellow-400 h-full w-1/4"></div>
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="p-6 md:p-10">
+            
+            <!-- Step 1: Introducción -->
+            <div id="step1" class="step-content active">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="flex-1">
+                        <h2 class="text-2xl font-semibold text-indigo-900 mb-4">La metáfora del tejido</h2>
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            Imagina que emprender es como tejer. No se trata de tener la "gran idea" de la nada, sino de elegir el hilo correcto basado en tu propia historia.
+                        </p>
+                        <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 italic text-gray-600">
+                            "Conocí a Roberto después de treinta años en la misma empresa. Tenía miedo, pero entendió que su experiencia en logística era su mejor hilo."
+                        </div>
+                    </div>
+                    <div class="w-48 h-48 bg-indigo-100 rounded-full flex items-center justify-center text-6xl shadow-inner">
+                        🧵
+                    </div>
+                </div>
+                <button onclick="nextStep(2)" class="mt-8 bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition w-full md:w-auto">Comenzar exploración</button>
+            </div>
+
+            <!-- Step 2: Las Tres Hebras -->
+            <div id="step2" class="step-content">
+                <h2 class="text-2xl font-semibold text-indigo-900 mb-6 text-center">Las 3 Hebras del Emprendedor</h2>
+                <p class="text-center text-gray-600 mb-8 text-sm">Haz clic en cada hebra para conocer su importancia en tu nuevo tejido.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="thread-card p-6 bg-pink-50 border border-pink-100 rounded-xl cursor-pointer text-center" onclick="showInfo('energia')">
+                        <div class="text-4xl mb-3">⚡</div>
+                        <h3 class="font-bold text-pink-900">Energía</h3>
+                        <p class="text-xs text-pink-700 mt-2">¿Qué te apasiona o te motiva a levantarte?</p>
+                    </div>
+                    <div class="thread-card p-6 bg-blue-50 border border-blue-100 rounded-xl cursor-pointer text-center" onclick="showInfo('experiencia')">
+                        <div class="text-4xl mb-3">🎓</div>
+                        <h3 class="font-bold text-blue-900">Experiencia</h3>
+                        <p class="text-xs text-blue-700 mt-2">Tus capacidades demostrables en años.</p>
+                    </div>
+                    <div class="thread-card p-6 bg-green-50 border border-green-100 rounded-xl cursor-pointer text-center" onclick="showInfo('presion')">
+                        <div class="text-4xl mb-3">💰</div>
+                        <h3 class="font-bold text-green-900">Presión Financiera</h3>
+                        <p class="text-xs text-green-700 mt-2">Tu realidad económica y tiempo de caja.</p>
+                    </div>
+                </div>
+
+                <div id="infoBox" class="mt-8 p-6 bg-gray-50 rounded-xl border border-dashed border-gray-300 min-h-[120px] flex items-center justify-center text-center text-gray-600">
+                    Selecciona una hebra para ver el detalle.
+                </div>
+
+                <div class="flex justify-between mt-10">
+                    <button onclick="nextStep(1)" class="text-indigo-600 font-medium">← Volver</button>
+                    <button onclick="nextStep(3)" class="bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition">Siguiente paso</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Inventario Inverso -->
+            <div id="step3" class="step-content">
+                <h2 class="text-2xl font-semibold text-indigo-900 mb-4">El Método del Inventario Inverso</h2>
+                <p class="text-gray-700 mb-6">No te preguntes solo qué sabes hacer. Observa qué te pide el mundo.</p>
+                
+                <div class="space-y-4">
+                    <div class="flex items-start gap-4 p-4 bg-white shadow-sm border rounded-lg">
+                        <div class="bg-yellow-400 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">1</div>
+                        <p class="text-gray-700">Revisa tus últimas conversaciones: ¿Qué ayuda te piden siempre?</p>
+                    </div>
+                    <div class="flex items-start gap-4 p-4 bg-white shadow-sm border rounded-lg">
+                        <div class="bg-yellow-400 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">2</div>
+                        <p class="text-gray-700">Identifica en qué problemas eres la referencia para tus amigos o ex-colegas.</p>
+                    </div>
+                    <div class="flex items-start gap-4 p-4 bg-white shadow-sm border rounded-lg">
+                        <div class="bg-yellow-400 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">3</div>
+                        <p class="text-gray-700">Encuentra la intersección entre ese pedido y tus capacidades reales.</p>
+                    </div>
+                </div>
+
+                <div class="flex justify-between mt-10">
+                    <button onclick="nextStep(2)" class="text-indigo-600 font-medium">← Volver</button>
+                    <button onclick="nextStep(4)" class="bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition">Ir al Cuestionario Final</button>
+                </div>
+            </div>
+
+            <!-- Step 4: Cuestionario -->
+            <div id="step4" class="step-content">
+                <h2 class="text-2xl font-semibold text-indigo-900 mb-6">Comprueba lo aprendido</h2>
+                <div id="quizContainer" class="space-y-6">
+                    <div class="question">
+                        <p class="font-medium text-gray-800 mb-3">1. Según el módulo, ¿cuál es el error más común al buscar una idea de negocio tras una desvinculación?</p>
+                        <div class="space-y-2">
+                            <label class="block p-3 border rounded-lg hover:bg-indigo-50 cursor-pointer transition">
+                                <input type="radio" name="q1" value="a" class="mr-2"> Usar la liquidación para pagar deudas.
+                            </label>
+                            <label class="block p-3 border rounded-lg hover:bg-indigo-50 cursor-pointer transition">
+                                <input type="radio" name="q1" value="b" class="mr-2"> Esperar a que pase el duelo laboral.
+                            </label>
+                            <label class="block p-3 border rounded-lg hover:bg-indigo-50 cursor-pointer transition">
+                                <input type="radio" name="q1" value="correct" class="mr-2"> Buscar "la gran idea" de la nada o replicar sin cambios el empleo anterior.
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="checkQuiz()" class="mt-8 bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition w-full">Finalizar Módulo</button>
+            </div>
+
+            <!-- Step 5: Resultado -->
+            <div id="step5" class="step-content text-center">
+                <div class="text-6xl mb-6">🏆</div>
+                <h2 class="text-3xl font-bold text-indigo-900 mb-2">¡Módulo 1 Completado!</h2>
+                <p class="text-gray-600 mb-8">Has dado el primer paso para elegir tu hilo emprendedor de forma sólida.</p>
+                <div class="p-6 bg-indigo-50 rounded-xl inline-block text-left max-w-sm">
+                    <h4 class="font-bold text-indigo-900 mb-2">Recuerda:</h4>
+                    <ul class="text-sm text-indigo-700 space-y-2">
+                        <li>• Tu experiencia es tu capital más valioso.</li>
+                        <li>• Escucha lo que el entorno te pide (Inventario Inverso).</li>
+                        <li>• Respeta tu realidad financiera actual.</li>
+                    </ul>
+                </div>
+                <div class="mt-8">
+                    <button onclick="location.reload()" class="text-indigo-600 underline font-medium">Reiniciar recurso</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const threadData = {
+            energia: "La energía es el combustible. Si el hilo no te motiva, te cansarás antes de que el tejido sea grande. Pero ojo: la energía sin experiencia es peligrosa.",
+            experiencia: "Es tu historia demostrable. Son las capacidades que el mercado ya sabe que tienes. Emprender desde aquí reduce el riesgo al mínimo.",
+            presion: "Define cuánto tiempo puedes estar sin generar ingresos. Determina si necesitas un negocio de 'caja rápida' o si puedes permitirte un desarrollo largo."
+        };
+
+        function nextStep(step) {
+            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
+            document.getElementById('step' + step).classList.add('active');
+            
+            const progress = (step / 5) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function showInfo(type) {
+            const infoBox = document.getElementById('infoBox');
+            infoBox.innerHTML = `<p class="text-gray-800 animate-fadeIn">${threadData[type]}</p>`;
+            infoBox.classList.remove('text-gray-600');
+            infoBox.classList.add('bg-white', 'border-indigo-200', 'shadow-sm');
+        }
+
+        function checkQuiz() {
+            const selected = document.querySelector('input[name="q1"]:checked');
+            if (!selected) {
+                alert("Por favor, selecciona una respuesta.");
+                return;
+            }
+
+            if (selected.value === 'correct') {
+                nextStep(5);
+            } else {
+                alert("Respuesta incorrecta. Recuerda que el error es buscar ideas externas sin mirar tu propia experiencia.");
+            }
+        }
+    </script>
+</body>
+</html>
