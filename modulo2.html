@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 2: Validar el Tejido (MVP)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+        }
+
+        .card-interaction {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-interaction:hover {
+            transform: scale(1.02);
+            border-color: #6366f1;
+        }
+
+        .progress-bar {
+            transition: width 0.6s ease;
+        }
+
+        .step-content {
+            display: none;
+        }
+
+        .step-content.active {
+            display: block;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback-bubble {
+            display: none;
+            animation: fadeIn 0.3s forwards;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-12">
+    <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-cyan-600 to-indigo-700 p-8 text-white">
+            <div class="flex justify-between items-center mb-4">
+                <span class="text-xs font-bold uppercase tracking-widest bg-white/20 px-3 py-1 rounded-full text-white">Etapa de Validación</span>
+                <span id="stepCounter" class="text-sm font-medium">Paso 1 de 4</span>
+            </div>
+            <h1 class="text-3xl font-extrabold">Módulo 2: Validar el Tejido</h1>
+            <p class="text-cyan-100 mt-2">Del "me parece una buena idea" al "el mercado lo necesita".</p>
+            
+            <div class="w-full bg-white/20 h-2 mt-8 rounded-full">
+                <div id="progressBar" class="progress-bar bg-cyan-300 h-full w-1/4 rounded-full"></div>
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="p-8 md:p-12">
+            
+            <!-- Step 1: El Dolor Real -->
+            <div id="step1" class="step-content active">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">¿Qué es un "Dolor" en el mercado?</h2>
+                <p class="text-gray-600 mb-8 leading-relaxed">
+                    Antes de tejer la solución completa, debemos confirmar que el hilo resuelve un problema real. No preguntes si tu idea es buena; busca si el problema es <strong>frecuente y costoso</strong>.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="p-6 bg-red-50 border-2 border-red-100 rounded-2xl">
+                        <h3 class="font-bold text-red-700 flex items-center gap-2 mb-2">
+                            <span>❌</span> Mala Validación
+                        </h3>
+                        <p class="text-sm text-red-600 italic">"¿Te gustaría una App que organice tus tareas?"</p>
+                        <p class="text-xs text-red-500 mt-2">Error: Estás vendiendo tu idea, no explorando el problema.</p>
+                    </div>
+                    <div class="p-6 bg-green-50 border-2 border-green-100 rounded-2xl">
+                        <h3 class="font-bold text-green-700 flex items-center gap-2 mb-2">
+                            <span>✅</span> Buena Validación
+                        </h3>
+                        <p class="text-sm text-green-600 italic">"¿Cuánto dinero pierdes cuando tu equipo olvida una entrega?"</p>
+                        <p class="text-xs text-green-500 mt-2">Acierto: Estás midiendo el impacto del dolor.</p>
+                    </div>
+                </div>
+
+                <button onclick="nextStep(2)" class="mt-10 bg-indigo-600 text-white px-10 py-4 rounded-xl font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200 w-full md:w-auto">Entendido, pasemos al MVP</button>
+            </div>
+
+            <!-- Step 2: MVP Interactive -->
+            <div id="step2" class="step-content">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Construyendo tu MVP</h2>
+                <p class="text-gray-600 mb-8">El Producto Mínimo Viable no es algo "mal hecho", es la versión más simple que genera el <strong>resultado prometido</strong>.</p>
+                
+                <div class="space-y-4">
+                    <div class="card-interaction p-5 border-2 border-gray-100 rounded-xl cursor-pointer hover:bg-indigo-50" onclick="toggleFeedback('mvp1')">
+                        <h4 class="font-bold text-gray-700">Opción A: Invertir en desarrollo de 6 meses</h4>
+                        <div id="mvp1" class="feedback-bubble mt-3 text-sm text-red-600 font-medium">
+                            ⚠️ Riesgo alto. Podrías tejer algo que nadie quiere comprar después de medio año.
+                        </div>
+                    </div>
+                    <div class="card-interaction p-5 border-2 border-gray-100 rounded-xl cursor-pointer hover:bg-indigo-50" onclick="toggleFeedback('mvp2')">
+                        <h4 class="font-bold text-gray-700">Opción B: Realizar el servicio manualmente una vez</h4>
+                        <div id="mvp2" class="feedback-bubble mt-3 text-sm text-green-600 font-medium">
+                            ✨ ¡Correcto! Esto es un MVP. Aprendes del proceso real antes de automatizar.
+                        </div>
+                    </div>
+                    <div class="card-interaction p-5 border-2 border-gray-100 rounded-xl cursor-pointer hover:bg-indigo-50" onclick="toggleFeedback('mvp3')">
+                        <h4 class="font-bold text-gray-700">Opción C: Ofrecer consultoría gratuita de por vida</h4>
+                        <div id="mvp3" class="feedback-bubble mt-3 text-sm text-orange-600 font-medium">
+                            📉 El MVP debe validar que alguien está dispuesto a pagar por el alivio del dolor.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-between mt-12 items-center">
+                    <button onclick="nextStep(1)" class="text-gray-400 hover:text-indigo-600 font-bold">Atrás</button>
+                    <button onclick="nextStep(3)" class="bg-indigo-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-indigo-700 transition-all shadow-lg">Siguiente: Tracción</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Señales de Tracción -->
+            <div id="step3" class="step-content">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Interpretando las Señales</h2>
+                <p class="text-gray-600 mb-8">El mercado te habla a través de acciones, no de palabras. Aprende a distinguir las señales de humo de la tracción real.</p>
+                
+                <div class="bg-indigo-900 rounded-2xl p-8 text-white relative overflow-hidden">
+                    <div class="relative z-10">
+                        <h3 class="text-xl font-bold mb-4">¿Qué es tracción real?</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-center gap-3">
+                                <span class="text-green-400 text-xl font-bold">✔</span> 
+                                <span>Alguien desconocido paga por el servicio.</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="text-green-400 text-xl font-bold">✔</span> 
+                                <span>Un cliente te refiere a otra persona sin que se lo pidas.</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="text-red-400 text-xl font-bold">✘</span> 
+                                <span class="text-indigo-200 italic">"Tu idea es genial, te aviso cuando la necesite" (Esto NO es tracción).</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="absolute right-[-20px] bottom-[-20px] text-white/10 text-9xl font-black">
+                        !
+                    </div>
+                </div>
+
+                <div class="flex justify-between mt-12 items-center">
+                    <button onclick="nextStep(2)" class="text-gray-400 hover:text-indigo-600 font-bold">Atrás</button>
+                    <button onclick="nextStep(4)" class="bg-indigo-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-indigo-700 transition-all shadow-lg">Validar Aprendizaje</button>
+                </div>
+            </div>
+
+            <!-- Step 4: Quiz -->
+            <div id="step4" class="step-content">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Mini-Evaluación Módulo 2</h2>
+                <div class="p-8 bg-gray-50 rounded-2xl border-2 border-gray-100">
+                    <p class="font-bold text-gray-800 mb-6">Un amigo te dice: "Esa asesoría de logística que planteas es fantástica, te va a ir muy bien". Según el curso, ¿cómo debes tomar este comentario?</p>
+                    
+                    <div class="space-y-4">
+                        <button onclick="finish(false)" class="w-full text-left p-4 bg-white border border-gray-200 rounded-xl hover:border-indigo-400 transition-colors">
+                            A) Como una validación exitosa de que el negocio funcionará.
+                        </button>
+                        <button onclick="finish(true)" class="w-full text-left p-4 bg-white border border-gray-200 rounded-xl hover:border-indigo-400 transition-colors">
+                            B) Como un cumplido amable, pero que no constituye tracción real.
+                        </button>
+                        <button onclick="finish(false)" class="w-full text-left p-4 bg-white border border-gray-200 rounded-xl hover:border-indigo-400 transition-colors">
+                            C) Como una señal de que debes subir los precios inmediatamente.
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 5: Final -->
+            <div id="step5" class="step-content text-center py-10">
+                <div class="w-24 h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-5xl mx-auto mb-6">
+                    ✓
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">¡Validación Exitosa!</h2>
+                <p class="text-gray-600 mb-8 max-w-md mx-auto">Has completado el Módulo 2. Ahora sabes que antes de tejer el negocio completo, debes probar la resistencia de tu primer punto.</p>
+                
+                <div class="grid grid-cols-2 gap-4 max-w-sm mx-auto">
+                    <div class="p-4 bg-indigo-50 rounded-xl">
+                        <p class="text-xs font-bold text-indigo-800 uppercase">Foco</p>
+                        <p class="text-sm text-indigo-600">Dolor Real</p>
+                    </div>
+                    <div class="p-4 bg-cyan-50 rounded-xl">
+                        <p class="text-xs font-bold text-cyan-800 uppercase">Acción</p>
+                        <p class="text-sm text-cyan-600">MVP rápido</p>
+                    </div>
+                </div>
+
+                <button onclick="location.reload()" class="mt-12 text-gray-400 hover:text-indigo-600 underline font-medium">Volver a empezar</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function nextStep(step) {
+            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
+            document.getElementById('step' + step).classList.add('active');
+            
+            // UI Updates
+            const progress = (step / 4) * 100;
+            document.getElementById('progressBar').style.width = Math.min(progress, 100) + '%';
+            document.getElementById('stepCounter').innerText = `Paso ${Math.min(step, 4)} de 4`;
+            window.scrollTo(0,0);
+        }
+
+        function toggleFeedback(id) {
+            document.querySelectorAll('.feedback-bubble').forEach(b => b.style.display = 'none');
+            document.getElementById(id).style.display = 'block';
+        }
+
+        function finish(isCorrect) {
+            if(isCorrect) {
+                nextStep(5);
+            } else {
+                alert("Recuerda: El entusiasmo verbal no es tracción. La tracción es dinero o referidos reales. Inténtalo de nuevo.");
+            }
+        }
+    </script>
+</body>
+</html>
